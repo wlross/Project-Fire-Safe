@@ -21,8 +21,6 @@ It does this by: 1) Improving CALFIRE's information access during live fire even
 **How we built it**
 Our system primarily depends on predicting the relative "burn risk" among "threatened communities" (defined as a .5 x .5 KM area). This risk, as well as information informing that prediction and social vulnerability information relevant to that community is then visualized to response planners.
 
-![image](https://user-images.githubusercontent.com/58300517/84179836-c6057a80-aa43-11ea-829c-9923ea8d7f3b.png)
-
 In either a live fire or proactive planning event, the tool takes as use input a lat/long that defines an active or theoretical fire boundary. The system then simulates a series of potential boundaries for the fire and uses the minimum bounding geometry of those various simulations to define the population of "threatened communities". Today, our simulation engine is quite naive as extensive work by groups such as FlamMap and Crowley et al. has been carried out in this domain and we simply did not have the scope to integrate these models into our prototype as we would in a production system.
 
 With the population of "threatened communities" defined as the overlap of the potential burn radius and populated areas ("the WUI"), a series of individual "neighborhoods" is defined via a simple .5x.5KM grid over-layed on this intersection. For each section of this grid, the most recent Landsat 30M resolution image (R, G, B, and Infrared Bands) is extracted from Google Earth engine and passed into the core prediction model. It's worth noting that the use of higher resolution imagery such as Planet Labs 3M resolution or even Sentinel 10M resolution could be used as available.
@@ -34,6 +32,8 @@ In order to enable users to interpret the core prediction model, we also layered
 Lastly with a series of "neighborhoods" or "threatened communities" defined, a burn risk prediction (simulator), a damage risk prediction (CNN prediction model), and a social vulnerability index score (CDC's SVI) established, we visualize these metrics for a given event to the end user.
 
 On the whole, we believe this group of technologies, especially when put into a more robust production implementation, can ensure faster, more efficient, and more equitable live fire response and proactive management.
+
+![image](https://user-images.githubusercontent.com/58300517/84179836-c6057a80-aa43-11ea-829c-9923ea8d7f3b.png)
 
 **Challenges**
 With no prior geo-spatial backgrounds, our team faced several challenges in building and manipulating our data pipeline. Specific data challenges included:
